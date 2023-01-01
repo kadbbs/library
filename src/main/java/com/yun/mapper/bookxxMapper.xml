@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yun.mapper.bookxxMapper">
+
+    <resultMap id="bookxxmap" type="book">
+        <result property="bookname" column="bookname"></result>
+        <result property="author" column="author"></result>
+        <result property="intro" column="intro"></result>
+        <result property="category" column="category"></result>
+    </resultMap>
+    <sql id="allcolumns">
+        bookname,author,intro,category
+    </sql>
+    <select id="selectbook" resultMap="bookxxmap">
+        select <include refid="allcolumns"></include>
+        from book
+    </select>
+    <insert id="addbook" parameterType="book">
+        insert into book values (#{bookname},#{author},#{intro},#{category})
+    </insert>
+    <delete id="deletebook" parameterType="string">
+        delete from book where bookname=#{bookname}
+    </delete>
+
+</mapper>
